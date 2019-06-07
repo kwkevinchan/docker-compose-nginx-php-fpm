@@ -9,11 +9,17 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"
+      - "443:443"
+    volumn:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./code/line-bot/:/var/www/line-bot
     networks: 
       - backend
 
   php-fpm:
     image: php:fpm-alpine
+    volumn:
+      - ./code/line-bot/:/var/www/line-bot
     networks: 
       - backend
 
