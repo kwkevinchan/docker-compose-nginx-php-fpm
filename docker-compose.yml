@@ -12,14 +12,15 @@ services:
       - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./code/line-bot/:/var/www/line-bot
+      - ./code/line-bot/:/var/www/line-bot/
+      - ./ssl/letsencrypt:/etc/letsencrypt/
     networks: 
       - backend
 
   php-fpm:
-    image: php:fpm-alpine
+    image: kwkevinchan/php-fpm
     volumes:
-      - ./code/line-bot/:/var/www/line-bot
+      - ./code/line-bot/:/var/www/line-bot/
     networks: 
       - backend
 
@@ -27,7 +28,7 @@ services:
   mysql:
     image: mysql:5.6
     environment:
-      MYSQL_ROOT_PASSWORD: -------------
+      MYSQL_ROOT_PASSWORD: TgtvX0CCVtEbPtNI
     volumes:
       - ./data/mysql/:/var/lib/mysql
     networks: 
